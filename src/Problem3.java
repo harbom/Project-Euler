@@ -14,7 +14,7 @@ public class Problem3
         Long n = 600851475143L;
 
         //cant cast a double to a long so im taking the string workaround
-        String s = "" + Math.sqrt(n/2);
+        String s = "" + Math.sqrt(n);
         s = s.substring(0,s.indexOf("."));
         Long sqrtn = Long.parseLong(s);
 
