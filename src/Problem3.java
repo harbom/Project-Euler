@@ -36,7 +36,7 @@ public class Problem3
 
     }
 
-    private static boolean isPrimeNaive(Long l)
+    public static boolean isPrimeNaive(Long l)
     {
         //add all factors from 1..l into a list, check if list only has 2 elements: just 1 and l
         //factors of a number are <= n/2 (simple examples are like no greater factors of 100 than 50 etc)
