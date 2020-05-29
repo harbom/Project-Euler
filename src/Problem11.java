@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
+
 /*
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -23,8 +29,37 @@ What is the greatest product of four adjacent numbers in the same direction (up,
  */
 public class Problem11
 {
+    private static int[][] mat = new int[20][20];
     public static void main(String[] args)
     {
+        //array is stored in Problem11Data.txt
+        loadmatrix();
+    }
 
+    private static void loadmatrix()
+    {
+        String fpath = "src/Problem11Data.txt";
+        Scanner s = null;
+        try{
+            s = new Scanner(new File(fpath));
+        } catch (FileNotFoundException e) {}
+
+        for (int row = 0; row < 20; row++)
+        {
+            String[] arr = s.nextLine().split(" ");
+            for (int col = 0; col < 20; col++)
+            {
+                mat[row][col] = Integer.parseInt(arr[col]);
+            }
+        }
+
+        //check
+        for (int[] arr:mat)
+        {
+            for (int i:arr)
+                System.out.print(i+" ");
+
+            System.out.println();
+        }
     }
 }
