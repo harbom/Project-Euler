@@ -34,6 +34,71 @@ public class Problem11
     {
         //array is stored in Problem11Data.txt
         loadmatrix();
+
+        int greatestSum = 0;
+        for (int row = 0; row < 20; row++)
+        {
+            for (int col = 0; col < 20; col++)
+            {
+                //if 4 above, including this one, exists
+                if (row-3 >= 0)
+                {
+                    int top = mat[row][col]*mat[row-1][col]*mat[row-2][col]*mat[row-3][col];
+                    if (top > greatestSum) greatestSum = top;
+                }
+
+                //if 4 down
+                if (row+3 <= 19)
+                {
+                    int down = mat[row][col]*mat[row+1][col]*mat[row+2][col]*mat[row+3][col];
+                    if (down > greatestSum) greatestSum = down;
+                }
+
+                //if 4 left
+                if (col-3 >= 0)
+                {
+                    int left = mat[row][col]*mat[row][col-1]*mat[row][col-2]*mat[row][col-3];
+                    if (left > greatestSum) greatestSum = left;
+                }
+
+                //if 4 right
+                if (col+3<=19)
+                {
+                    int right = mat[row][col]*mat[row][col+1]*mat[row][col+2]*mat[row][col+3];
+                    if (right > greatestSum) greatestSum = right;
+                }
+
+                //if 4 top left
+                if (col-3>=0 && row-3>=0)
+                {
+                    int topleft = mat[row][col]*mat[row-1][col-1]*mat[row-2][col-2]*mat[row-3][col-3];
+                    if (topleft > greatestSum) greatestSum = topleft;
+                }
+
+                //if 4 top right
+                if (col+3<=19 && row-3>=0)
+                {
+                    int topright = mat[row][col]*mat[row-1][col+1]*mat[row-2][col+2]*mat[row-3][col+3];
+                    if (topright > greatestSum) greatestSum = topright;
+                }
+
+                //if 4 bottom left
+                if (col-3>=0 && row+3<=19)
+                {
+                    int botleft = mat[row][col]*mat[row+1][col-1]*mat[row+2][col-2]*mat[row+3][col-3];
+                    if (botleft > greatestSum) greatestSum = botleft;
+                }
+
+                //if 4 bottom right
+                if (col+3<=19 && row+3<=19)
+                {
+                    int botright = mat[row][col]*mat[row+1][col+1]*mat[row+2][col+2]*mat[row+3][col+3];
+                    if (botright > greatestSum) greatestSum = botright;
+                }
+            }
+        }
+
+        System.out.println(greatestSum);
     }
 
     private static void loadmatrix()
