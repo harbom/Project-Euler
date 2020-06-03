@@ -18,18 +18,16 @@ import java.util.*;
 
 public class Problem14
 {
-    private static Map<Integer,Integer> numsToLengthMapping = new HashMap<Integer,Integer>();
+    private static Map<Integer,Long> numsToLengthMapping = new HashMap<Integer,Long>();
     public static void main(String[] args)
     {
-        int maxlen=0;
-        int maxnum=0;
+        long maxlen=0;
+        long maxnum=0;
 
         //iterate regularly and update current highest length/numbers, return number at end
         for (int i = 1; i <= 999999; i+=2)
         {
-            int currlen = collatzChainLen(i);
-            //System.out.printf("%d\t%d\n",i,currlen);
-            //collatzChainLenRecursive(i,i,1);
+            long currlen = collatzChainLen(i);
             if (currlen > maxlen)
             {
                 maxlen = currlen;//currLength;
@@ -42,9 +40,9 @@ public class Problem14
         System.out.println(maxnum);
     }
 
-    private static int collatzChainLen(int number)
+    private static long collatzChainLen(int number)
     {
-        int len = 1;
+        long len = 1;
         int tempnum = number;
         while(tempnum != 1)
         {
@@ -69,7 +67,7 @@ public class Problem14
 
     private static void printMap()
     {
-        for (Map.Entry<Integer,Integer> i:numsToLengthMapping.entrySet())
+        for (Map.Entry<Integer,Long> i:numsToLengthMapping.entrySet())
         {
             System.out.printf("key: %d\tvalue: %d\n",i.getKey(),i.getValue());
         }
