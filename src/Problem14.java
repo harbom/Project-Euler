@@ -18,7 +18,6 @@ import java.util.*;
 
 public class Problem14
 {
-    private static int currLength = 0;
     private static Map<Integer,Integer> numsToLengthMapping = new HashMap<Integer,Integer>();
     public static void main(String[] args)
     {
@@ -26,17 +25,19 @@ public class Problem14
         int maxnum=0;
 
         //iterate regularly and update current highest length/numbers, return number at end
-        for (int i = 1; i <= 20; i++)
+        for (int i = 1; i <= 999999; i+=2)
         {
             int currlen = collatzChainLen(i);
+            //System.out.printf("%d\t%d\n",i,currlen);
+            //collatzChainLenRecursive(i,i,1);
             if (currlen > maxlen)
             {
-                maxlen = currlen;
+                maxlen = currlen;//currLength;
                 maxnum=i;
             }
         }
 
-        printMap();
+        //printMap();
 
         System.out.println(maxnum);
     }
@@ -45,7 +46,6 @@ public class Problem14
     {
         int len = 1;
         int tempnum = number;
-        if (tempnum ==1) return 1;
         while(tempnum != 1)
         {
             if (numsToLengthMapping.containsKey(tempnum)) //deal with case of seeing past numbers
@@ -61,30 +61,10 @@ public class Problem14
             len++;
         }
 
+
         //store it here for further use
         numsToLengthMapping.put(number,len);
         return len;
-    }
-
-    //returns length of collatz chain for a given integer
-    //doesnt seem to be working well, stack overflow issues
-    private static void collatzChainLenRecursive(int number,int length)
-    {
-        if(number==1)
-        {
-            currLength = length; //+1 for the 1 in the sequence, store it in a class variable
-            return;
-        }
-
-        //recurse
-        else if (number%2==0)
-        {
-            collatzChainLenRecursive(number/2,length+1);
-        }
-        else
-        {
-            collatzChainLenRecursive(3*number +1,length+1);
-        }
     }
 
     private static void printMap()
@@ -95,3 +75,32 @@ public class Problem14
         }
     }
 }
+
+/*
+    //returns length of collatz chain for a given integer
+    //doesnt seem to be working well, stack overflow issues
+    private static void collatzChainLenRecursive(int number,int tempnum, int length)
+    {
+        if(number==1)
+        {
+            currLength = length;
+            numsToLengthMapping.put(number,length);
+            return;
+        }
+
+        if (numsToLengthMapping.containsKey(tempnum)) //deal with case of seeing past numbers
+        {
+            currLength = length + numsToLengthMapping.get(tempnum)-1; //-1 for the overlap of the current loop and the past loop?
+            return;
+        }
+        //recurse
+        else if (tempnum%2==0)
+        {
+            collatzChainLenRecursive(number,tempnum/2,length+1);
+        }
+        else
+        {
+            collatzChainLenRecursive(number,3*tempnum +1,length+1);
+        }
+    }
+*/
