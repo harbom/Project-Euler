@@ -14,7 +14,7 @@ def main():
     
     #DP: past[x][y]=past[x-1][y] + past[x][y-1]
     for x in range(1,len(past)):
-        for y in range(len(past[0])):
+        for y in range(1,len(past[0])):
             past[x][y] = past[x-1][y] + past[x][y-1]
 
     #print(past)
