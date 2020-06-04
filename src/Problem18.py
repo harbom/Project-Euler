@@ -24,3 +24,36 @@ Find the maximum total from top to bottom of the triangle below:
 91 71 52 38 17 14 91 43 58 50 27 29 48
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
+
+graph = {}
+class Node():
+    def __init__(self,val):
+        self.val = val
+
+def init_graph():
+    r = open("Problem18Data.txt")
+    lines = r.readlines()
+    lines = [i[:-1] for i in lines] #remove the \n
+    #print(lines)
+
+    for i in range(len(lines)-1):
+        for val in lines[i].split(" "): #split on whitespace
+            thisnode = Node(int(val))
+            nextline = [int(j) for j in lines[i+1].split(" ")] #the next line in the data file
+            #print(nextline)
+            nextnodelist = [Node(int(j)) for j in nextline] #nextnodelist is the next level
+
+            graph[thisnode] = nextnodelist #assign the node 
+    
+    #confirm its working ok
+    #print_graph()
+
+def print_graph():
+    for g in graph:
+        print("key: ",g.val,"  nextlist: ",[i.val for i in graph[g]])
+def main():
+    init_graph()
+
+
+if __name__ == '__main__':
+    main()
