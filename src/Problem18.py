@@ -46,30 +46,52 @@ def assign_node_nodelist(lines,index,thisnode):
         
         graph[thisnode] = nextnodelist #assign the node 
 
+nodeArray = []
 def init_graph():
     r = open("Problem18Data.txt")
     lines = r.readlines()
     lines = [i[:-1] for i in lines] #remove the \n
-    #print(lines)
+    lines = [i.split(" ") for i in lines]
 
-    rootnode = Node(int(lines[0]))
-    assign_node_nodelist(lines,0,rootnode)
+    #add all nodes to a huge nodeArray
+    for currline in lines:
+        newentry = []
+        for val in currline:
+            newentry.append(Node(int(val)))
+        nodeArray.append(newentry)
+    
+    #for each line, add to the map: graph[val] = nextline
+    for i in range(len(nodeArray)):
+        currarray = nodeArray[i]
+        for currnode in currarray:
+            if (i == len(nodeArray)-1):
+                graph[currnode] = [] #put a blank array for 
+            else:
+                graph[currnode] = nodeArray[i+1]
+    
+    #print(lines)
+    #printNodeArray(newNodeArray);
+    #rootnode = Node(int(lines[0]))
+    #assign_node_nodelist(lines,0,rootnode)
     
     #confirm its working ok
     #print_graph()
 
+def printNodeArray(arr):
+    for line in arr:
+        for node in line:
+            print(node.val)
+        print()
+
 def print_graph():
     for g in graph:
-        if graph[g]:
             print("key: ",g.val,"  nextlist: ",[i.val for i in graph[g]])
-        else:
-            print("key: ",g.val,"  nextlist: None")
 
 visited = set() #keeping track of nodes already visited
 
 def DFS(visited, graph, node):
     if node not in visited:
-        print(node.val)
+        #print(node.val)
         visited.add(node)
         nextnodelist = graph[node]
         for nextnode in nextnodelist:
@@ -77,14 +99,11 @@ def DFS(visited, graph, node):
 
 def main():
     init_graph()
+    root = nodeArray[0][0]
+    #print(root.val) cool n good
 
     #do DFS
-    #print([k.val for k in graph.keys()])
-    
-    #python graphs maintain the order that they were inserted
-    #root = list(graph.keys())[0]
-    #print(root in graph) --> True
-    #DFS(visited, graph, root)
+    DFS(visited, graph, root)
 
 
 if __name__ == '__main__':
