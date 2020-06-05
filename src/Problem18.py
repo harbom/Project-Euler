@@ -95,7 +95,7 @@ maxlist = [0]
 def DFS(visited, graph, node, sum):
     if node not in visited:
         sum += node.val
-        #print(node.val)
+        print("curr val: ",node.val,"  sum: ",sum)
         visited.add(node)
         nextnodelist = graph[node]
         if (len(nextnodelist) == 0): #the bottom most nodes
@@ -103,13 +103,25 @@ def DFS(visited, graph, node, sum):
         for nextnode in nextnodelist:
             DFS(visited,graph,nextnode, sum)
 
+def regularRecursion(node,sum):
+    sum += node.val
+    nextnodelist = graph[node]
+    if len(nextnodelist) == 0: #bottom of the triangle
+        if sum > maxlist[0]:
+            maxlist[0] = sum
+    else:
+        regularRecursion(nextnodelist[0],sum) #only have 2 chilren: adjacent ones
+        regularRecursion(nextnodelist[1],sum)    
 def main():
     init_graph()
     root = nodeArray[0][0]
     #print(root.val) cool n good
 
     #do DFS
-    DFS(visited, graph, root, root.val)
+    #DFS(visited, graph, root, 0)
+    
+    #do regular recursion
+    regularRecursion(root,0)
     print(max(maxlist))
 
 
