@@ -63,11 +63,13 @@ def init_graph():
     #for each line, add to the map: graph[val] = nextline
     for i in range(len(nodeArray)):
         currarray = nodeArray[i]
-        for currnode in currarray:
+        for j in range(len(currarray)):
+            currnode = currarray[j]
             if (i == len(nodeArray)-1):
                 graph[currnode] = [] #put a blank array for 
             else:
-                graph[currnode] = nodeArray[i+1]
+                #have to make sure only adjacent members in the next line are added
+                graph[currnode] = [nodeArray[i+1][j], nodeArray[i+1][j+1]]
     
     #print(lines)
     #printNodeArray(newNodeArray);
@@ -89,13 +91,17 @@ def print_graph():
 
 visited = set() #keeping track of nodes already visited
 
-def DFS(visited, graph, node):
+maxlist = [0]
+def DFS(visited, graph, node, sum):
     if node not in visited:
+        sum += node.val
         #print(node.val)
         visited.add(node)
         nextnodelist = graph[node]
+        if (len(nextnodelist) == 0): #the bottom most nodes
+            maxlist.append(sum)
         for nextnode in nextnodelist:
-            DFS(visited,graph,nextnode)
+            DFS(visited,graph,nextnode, sum)
 
 def main():
     init_graph()
@@ -103,7 +109,8 @@ def main():
     #print(root.val) cool n good
 
     #do DFS
-    DFS(visited, graph, root)
+    DFS(visited, graph, root, root.val)
+    print(max(maxlist))
 
 
 if __name__ == '__main__':
