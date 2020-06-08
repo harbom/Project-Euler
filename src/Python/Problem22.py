@@ -17,7 +17,17 @@ def initNamesArr():
     #print(names)
 def main():
     initNamesArr()
-    pass
+    names.sort()
+    #print(names)
+
+    total=0
+    top = len(names)
+    for i in range(top):
+        index=i+1
+        currsum = sum([ord(name)-64 for name in names[i]]) #-64 to make A->1, B->2 etc
+        total += index*currsum
+    
+    print(total)
 
 if __name__ == '__main__':
     main()
