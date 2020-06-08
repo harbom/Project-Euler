@@ -19,28 +19,15 @@ def is_deficient(n: int) -> bool:
 perfectlist = list()
 abundantlist = list()
 def is_abundant(n: int) -> bool:
-    for i in perfectlist: #found off of wikipedia
+    """for i in perfectlist: #found off of wikipedia
         if n%i==0:
             return True
     
     for i in abundantlist: #another thing found off of wikipedia
         if n%i==0:
-            return True
+            return True"""
     
     return d(n) > n
-
-def is_sum_of_abundant(n:int) -> bool:
-    for i in range(12,n):
-        if not(is_abundant(i)):
-            continue
-        for j in range(12,n):
-            if not(is_abundant(j)):
-                continue
-            
-            if i+j==n:
-                return True
-    
-    return False
 
 def init_perfectlist():
     for i in range(2,28123):
@@ -54,13 +41,20 @@ def init_abundantlist():
 
 def main():
     total=0
-    init_perfectlist() #working ok
+    #init_perfectlist() #working ok
     #print(perfectlist)
     init_abundantlist() #working ok
-    #print(abundantlist)
+    print(abundantlist)
     
-    for num in range(24,28124):
-        if not(is_sum_of_abundant(num)):
+    for num in range(2,28124):
+        #need to see if num is a sum of abundant numbers
+        is_sum = False
+        for i in range(1,num+1):
+            if (i in abundantlist) and (num-i in abundantlist):
+                is_sum = True
+                break
+        
+        if not(is_sum):
             total += num
     
     print(total)

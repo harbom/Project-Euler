@@ -2,3 +2,7 @@
 *.iml
 out/
 *.class
+
+#vscode python stuff
+Python/__pycache__/
+*.pyc
