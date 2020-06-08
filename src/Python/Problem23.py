@@ -46,7 +46,7 @@ def main():
     init_abundantlist() #working ok
     print(abundantlist)
     
-    for num in range(2,28124):
+    for num in range(1,28124):
         #need to see if num is a sum of abundant numbers
         is_sum = False
         for i in range(1,num+1):
