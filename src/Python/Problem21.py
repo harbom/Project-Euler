@@ -14,7 +14,7 @@ def d(n) -> int:
     for i in range(1,int(math.sqrt(n)+1)):
         if n%i==0:
             divsum += i #add both divisor and quotient
-            if (n/i != n):
+            if (n/i != n and n/i != i): #avoids case of like 2 being counted as a divisor for 4 twice
                 divsum += n/i
     #print("n: ",n,"   divsum: ",divsum)
     
