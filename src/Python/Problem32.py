@@ -7,8 +7,29 @@ Find the sum of all products whose multiplicand/multiplier/product identity can 
 HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 """
 
+def ispandigital(mult1: int,mult2: int, product: int) -> bool:
+    string = "%d%d%d" % (mult1,mult2,product)
+    if len(string) != 9: #9 digits only
+        return False
+
+    for i in range(1,10):
+        if string.count(str(i)) != 1: #each val only appears once
+            return False
+    
+    return True
+
 def main():
-    pass
+    #brute force iteration
+
+    seen = set() #to avoid double counting 
+    for a in range(9999):
+        for b in range(9999):
+            prod = a*b
+            if ispandigital(a,b,prod) and prod not in seen:
+                #print("a: %d, b: %d, prod: %d" % (a,b,prod))
+                seen.add(prod)
+    
+    print(sum(seen))
 
 if __name__ == "__main__":
     main()
