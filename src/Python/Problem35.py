@@ -34,14 +34,16 @@ def main():
         currlen = len(currstr)
         
         
-        areRotationsPrimeList = list()
+        areRotationsPrimeList = True
         for i in range(currlen):
             #197, 971, 719: 197 is original string so its str[i:] + str[:i] to find all rotations
             currrotation = currstr[i:] + currstr[:i]
             
-            areRotationsPrimeList.append(int(currrotation) in listprimes) #boolean
-        
-        if all(areRotationsPrimeList):
+            if(int(currrotation) not in listprimes):
+                areRotationsPrimeList = False
+                break
+
+        if areRotationsPrimeList:
             numcircprimes += 1
     
     print(numcircprimes)
