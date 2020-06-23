@@ -19,10 +19,10 @@ def main():
     maxsols = 0
     for p in range(3,1001):
         currcount=0
-        for n3 in range(1,int(p/2)+1):
-            for n2 in range(1,n3):
-                for n1 in range(1,n2):
-                    if isPythagorean(n1,n2,n3):
+        for n3 in range(int(p/2)+1,0,-1):
+            for n2 in range(n3-1,0,-1):
+                for n1 in range(n2-1,0,-1):
+                    if isPythagorean(n1,n2,n3) and n1+n2+n3==p:
                         currcount+=1
         
         if currcount > maxsols:
