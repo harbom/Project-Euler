@@ -6,8 +6,29 @@ If p is the perimeter of a right angle triangle with integral length sides, {a,b
 For which value of p ≤ 1000, is the number of solutions maximised?
 """
 
+def isPythagorean(a:int,b:int,c:int) -> bool:
+    if not(c>b>a) or (a==b or b==c or a==c):
+        return False
+    return a**2 + b**2 == c**2
+
 def main():
-    pass
+    #properties of triangle side lengths: triangle inequality
+    #triple for loop? key word, RIGHT ANGLE TRIANGLE
+    #if its a right angle triangle, the sides are pythagorean, and the three sides are unique/n3>n2>n1
+
+    maxsols = 0
+    for p in range(3,1001):
+        currcount=0
+        for n3 in range(1,int(p/2)+1):
+            for n2 in range(1,n3):
+                for n1 in range(1,n2):
+                    if isPythagorean(n1,n2,n3):
+                        currcount+=1
+        
+        if currcount > maxsols:
+            maxsols = currcount
+    
+    print(maxsols)
 
 if __name__ == "__main__":
     main()
