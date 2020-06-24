@@ -11,12 +11,13 @@ The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4, and 5
 
 What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 """
-def isStringPandigital(n: str) -> bool:
-    if len(n) != 9:
+def isStringPandigital(num: str, n:int) -> bool:
+    """Returns if a string num is pandigital for n digits. Ex, 2143 is pandigital for 4 digits."""
+    if len(num) != n:
         return False
     
-    for i in range(1,10):
-        if n.count(str(i)) != 1:
+    for i in range(1,n+1):
+        if num.count(str(i)) != 1:
             return False
     return True
 
