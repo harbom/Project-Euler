@@ -35,7 +35,7 @@ def main():
             for i in range(1,n+1):
                 currstr += str(num*i)
             
-            if isStringPandigital(currstr):
+            if isStringPandigital(currstr,9):
                 if int(currstr) > ans:
                     ans = int(currstr)
     
