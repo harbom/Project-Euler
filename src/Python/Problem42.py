@@ -7,9 +7,45 @@ By converting each letter in a word to a number corresponding to its alphabetica
 
 Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly two-thousand common English words, how many are triangle words?
 """
+names=[]
+
+def initNamesArr():
+    r = open("src/Python/Problem42Data.txt")
+    allstrings = r.read()
+    r.close()
+
+    allstrings = allstrings.split(",")
+    for name in allstrings:
+        names.append(name[1:-1])
+
+def create_triangle_list(longest_word_length: int) -> list:
+    n=0
+    curr_tri_num = int(n*(n+1)/2)
+    triangle_list = list()
+
+    while(curr_tri_num < longest_word_length*26):
+        triangle_list.append(curr_tri_num)
+        n+=1
+        curr_tri_num = int(n*(n+1)/2)
+    
+    return triangle_list
 
 def main():
-    pass
+    initNamesArr()
+    longest_word_length = max(map(len,names))
+    
+    triangle_list = create_triangle_list(longest_word_length)
+    ans = 0
+
+    for currname in names:
+        currsum = 0
+        for i in currname:
+            currsum += ord(i) - 64 #to get A->1, B->2 etc
+        
+        if currsum in triangle_list:
+            ans += 1
+    
+    print(ans)
 
 if __name__ == "__main__":
-    pass()
+    main()
