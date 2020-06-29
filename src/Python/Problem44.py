@@ -10,7 +10,34 @@ Find the pair of pentagonal numbers, P_j and P_k, for which their sum and differ
 """
 
 def main():
-    pass
+    pent = lambda x: x*(3*x - 1)/2 #pentagonal # function
+
+    pents = set()
+    upperlim = 10000
+    for i in range(1,upperlim):
+        pents.add(pent(i))
+    
+    #print(pents[0:10]) #confirmation that the list is good
+    
+    #iterate over and find the pair
+    ans = 10000000000
+    for j in range(1,int(upperlim/2)):
+        for k in range(1,int(upperlim/2)):
+            if k==j: #different #s
+                continue
+
+            #check if the diff and sum are also pent #s
+            if (pent(j) + pent(k) not in pents) or (abs(pent(j) - pent(k)) not in pents):
+                continue
+
+            #see if difference < ans
+            currdif = abs(pent(k) - pent(j))
+            if currdif < ans:
+                ans = currdif
+    
+    print(ans)
+
+
 
 if __name__ == "__main__":
     main()
