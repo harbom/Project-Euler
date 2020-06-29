@@ -10,7 +10,27 @@ Find the next triangle number that is also pentagonal and hexagonal.
 """
 
 def main():
-    pass
+    #set up functions to generate the different sequences
+    tri = lambda n: n*(n+1)/2
+    pent = lambda n: n*(3*n-1)/2
+    hex = lambda n: n*(2*n-1)
+
+    triset,pentset,hexset = list(),list(),list()
+
+    #populate the sets
+    for i in range(1,1000000):
+        triset.append(tri(i))
+        pentset.append(pent(i))
+        hexset.append(hex(i))
+
+
+    index = hexset.index(40755) #only iterate over one of the sets rather than naive iteration to improve speed
+    
+    for i in range(index+1,len(hexset)):
+        num = hexset[i]
+        if num in triset and num in pentset: #check if number is also in those lists
+            print(num)
+            break
 
 if __name__ == "__main__":
     main()
