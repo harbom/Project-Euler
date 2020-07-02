@@ -12,8 +12,6 @@ public class Problem47
         int[] arr = {20,21,22,23};
         while(true)
         {
-            boolean[] boolarr = new boolean[4];
-
             boolean flag = false;
             for (int i = 0; i < 4; i++)
             {

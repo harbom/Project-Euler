@@ -55,13 +55,21 @@ def main():
     
     arr = [1,2,3,4]
     while(True):
-        #print(arr)
-        boolarr = [len(listPrimeDivisors(i))==4 for i in arr]
-        if all(boolarr): #all 4 are consecutives that have 4 prime divisors
-            print("ans: ",arr[0])
-            break
+        
+        flag = False
+        for i in range(4):
+            currbool = len(listPrimeDivisors(arr[i])) == 4
+            if not(currbool): #avoid doing further unecessary computation
+                flag = True
+                break
+        
+        if flag: #iterate onwards
+            arr = [i+1 for i in arr]
+            continue
 
-        arr = [i+1 for i in arr]
+        #otherwise it got here, so it should be good
+        print("answer: ",arr[0])
+        break
 
 if __name__ == '__main__':
     main()
