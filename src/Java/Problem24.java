@@ -11,7 +11,7 @@ public class Problem24
 {
     private static List<String> permutations = new ArrayList<String>();
     private static int n = 3;
-    private static String str = "0123456789";
+    private static String str = "123";
     public static void main(String[] args)
     {
         //make a function to generate permutations of a string, preferably put them in an array
@@ -21,11 +21,11 @@ public class Problem24
         System.out.println(permutations.size());
         Collections.sort(permutations);
 
-        System.out.println(permutations.get(999999));
-        /*for (String i:permutations)
+        //System.out.println(permutations.get(999999));
+        for (String i:permutations)
         {
             System.out.println(i);
-        }*/
+        }
     }
 
     private static void permute(String prefix, String str)
